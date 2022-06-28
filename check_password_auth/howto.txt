@@ -1,0 +1,20 @@
+Best works with masscan!
+https://github.com/robertdavidgraham/masscan
+
+For example, scan the 95.85.0.0/16 range for SSH, HTTP and HTTPS and save
+the output to a file in your Docs folder
+
+sudo masscan 95.85.0.0/16 -p22,80,443 -oX /home/$USER/Documents/output.txt
+
+Then you have to get IPs from the file by using gawk. For example, to get only
+SSH use this command:
+
+cat output.txt | grep 'portid="22"' | gawk -v FS=\" '{print $4}' > pureIPs.txt
+
+The output was redirected to the pureIPs.txt file
+
+Them run the shell script with the file as an argument
+
+./password-auth-ssh.sh pureIPS.txt
+
+Done!
